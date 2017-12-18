@@ -11,8 +11,12 @@ groupadd <groupname>
 
 # 添加用户：并禁止登入系统权限
 useradd -g <groupname> -s /sbin/nologin <username>
+
 # 删除用户：同时删除用户主目录
 userdel -r <username>
+
+# 禁用用户登入
+usermod -s /sbin/nologin nginx
 
 # useradd 选项 用户名
 # 参 数 描 述 
