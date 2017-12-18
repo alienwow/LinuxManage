@@ -49,6 +49,12 @@ cd /etc/rc.d
 # 例如：mv /etc/rc.d/rc3.d/S85redis /etc/rc.d/rc3.d/S84redis
 ```
 
+## 自动启动
+```bash
+chkconfig --add nginx
+chkconfig --level 345 nginx on 
+```
+
 ## 添加环境变量
 ``` bash
 export PATH=/softwares/nginx-rtmp/ffmpeg-2.8/:$PATH
