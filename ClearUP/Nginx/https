@@ -1,0 +1,50 @@
+server
+{
+    server_name passport1.pxmimi.com;
+    listen 80;
+    listen 443 ssl;
+    ssl on;
+    ### SSL cert files ###
+        ssl_certificate      ssl/passport1.silentwind.com.cn.crt;
+        ssl_certificate_key  ssl/passport1.silentwind.com.cn.key;
+    ### Add SSL specific settings here ###
+    
+    charset utf8;
+    index index.html index.htm;
+    error_page      404 500 502 503 504  /50x.html;
+    access_log off;
+    #access_log /data/nginx/logs/tfs.log;
+    location = /50x.html {
+        internal;
+        root html;
+    }
+    location ~* \*.(htm|html|gif|jpg|jpeg|png|bmp|swf|ioc|rar|zip|txt|flv|mid|doc|ppt|pdf|xls|mp3|wma)$ {
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        if (-f $request_filename) {
+            proxy_pass http://10.99.187.201:7073;
+            expires 10d;
+            break;
+        }
+    }
+    location ~* \*.(js|css)?$ {
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        if (-f $request_filename) {
+            proxy_pass http://10.99.187.201:7073;
+            expires 1h;
+            break;
+        }
+    }
+    location / {
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://10.99.187.201:7073;
+   }
+}

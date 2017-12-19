@@ -1,0 +1,15 @@
+1、安装iptables
+yum install iptables-services #安装
+
+2、卸载firewall
+#systemctl stop firewalld.service #停止firewall
+#systemctl disable firewalld.service #禁止firewall开机启动
+#vi /etc/sysconfig/iptables
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+
+systemctl restart iptables.service #最后重启防火墙使配置生效
+systemctl enable iptables.service #设置防火墙开机启动
+
+开机启动防火墙
+chkconfig --add iptables
+chkconfig --level 345 iptables on 
