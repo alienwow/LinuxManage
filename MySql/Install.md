@@ -1,9 +1,13 @@
 ## 准备工作
 下载软件到 /softwares 目录
-    http://ftp.ntu.edu.tw/MySQL/Downloads/
-    http://ftp.ntu.edu.tw/MySQL/Downloads/MySQL-5.6/MySQL-server-5.6.20-1.el6.x86_64.rpm
-    http://ftp.ntu.edu.tw/MySQL/Downloads/MySQL-5.6/MySQL-devel-5.6.20-1.el6.x86_64.rpm
-    http://ftp.ntu.edu.tw/MySQL/Downloads/MySQL-5.6/MySQL-client-5.6.20-1.el6.x86_64.rpm
+
+[http://ftp.ntu.edu.tw/MySQL/Downloads/](http://ftp.ntu.edu.tw/MySQL/Downloads/)
+
+[MySQL-server-5.6.20-1.el6.x86_64.rpm](http://ftp.ntu.edu.tw/MySQL/Downloads/MySQL-5.6/MySQL-server-5.6.20-1.el6.x86_64.rpm)
+
+[MySQL-devel-5.6.20-1.el6.x86_64.rpm](http://ftp.ntu.edu.tw/MySQL/Downloads/MySQL-5.6/MySQL-devel-5.6.20-1.el6.x86_64.rpm)
+
+[MySQL-client-5.6.20-1.el6.x86_64.rpm](http://ftp.ntu.edu.tw/MySQL/Downloads/MySQL-5.6/MySQL-client-5.6.20-1.el6.x86_64.rpm)
 
 ## 开始安装
 1、卸载原有的 mysql
