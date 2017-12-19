@@ -42,7 +42,13 @@ chmod 755 /etc/init.d/mongod
 ################################################################################
 ```
 
-6、配置mongodb 用户及权限
+6、设置开机启动
+```bash
+chkconfig --add mongod
+chkconfig --level 345 mongod on
+```
+
+7、配置mongodb 用户及权限
 ```bash
 # 链接mongodb
 /walkingtec/mongodb/bin/mongo 127.0.0.1:7006/admin
@@ -89,7 +95,7 @@ chmod 755 /etc/init.d/mongod
 /walkingtec/mongodb/bin/mongo 127.0.0.1:7006/admin -u admin -p
 ```
 
-7、连接 mongodb与认证
+8、连接 mongodb与认证
 ```bash
 /walkingtec/mongodb/bin/mongo 10.161.219.94:7006/quietly -u quietly_admin -p bpo_123
 /walkingtec/mongodb/bin/mongo 10.161.219.94:7006/admin -u admin -p walkingtec_0327
@@ -102,12 +108,12 @@ db.auth('admin','walkingtec_0327')
 db.MemberAccount.remove({"ID":"170f89b8-9e22-11e5-ba15-00163e001096"})
 ```
 
-8、备份
+9、备份
 ```bash
 /walkingtec/mongodb/bin/mongodump -h 10.161.219.94:7006 -d quietly -u quietly_admin -p bpo_123 -o /data/backup
 ```
 
-9、监控
+10、监控
 ```bash
 # mongostat监控
 /walkingtec/mongodb/bin/mongostat -h 10.161.219.94:7006 -u admin -p walkingtec_0327
