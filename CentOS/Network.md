@@ -23,6 +23,7 @@ vi /etc/sysconfig/network-scripts/ifcfg-eth0
 # 网卡对应的设备别名
 DEVICE=eth0
 # 网卡获得ip地址的方式（默认为dhcp，表示自动获取） none、static、dhcp
+# 设置未 none 重启后会自动联网
 BOOTPROTO=static
 TYPE=Ethernet
 UUID=fb949c96-65be-4a2e-97b0-9a5da6a8f0f1
