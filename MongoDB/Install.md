@@ -126,23 +126,3 @@ db.MemberAccount.remove({"ID":"170f89b8-9e22-11e5-ba15-00163e001096"})
     # 先use对应的库
     > db.MemberAccount.stats()
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-```bash
-```
