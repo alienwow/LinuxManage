@@ -57,11 +57,11 @@ chkconfig --level 345 nginx on
 
 ## 添加环境变量
 ``` bash
-export PATH=/softwares/nginx-rtmp/ffmpeg-2.8/:$PATH
+# 环境变量目录
+vi /etc/profile
 
+# 导入环境变量
 export PATH=/walkingtec/ffmpeg/include/:$PATH
 export PATH=/walkingtec/ffmpeg/lib/:$PATH
 
-export PATH=/walkingtec/ffmpeg/include:$PATH
-export PATH=/walkingtec/ffmpeg/lib:$PATH
 ```
