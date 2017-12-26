@@ -1,0 +1,19 @@
+#pic.showjiajia.com
+server
+{
+    server_name pic.showjiajia.com;
+    listen 80;
+    charset utf8;
+    index index.html index.htm;
+    error_page      404 500 502 503 504  /50x.html;
+    access_log off;
+    #access_log /data/nginx/logs/pic.log;
+    location = /50x.html {
+        internal;
+        root html;
+    }
+    location /g1/M00{
+        root /data/fastdfs/storage/data;
+        ngx_fastdfs_module;
+    }
+}

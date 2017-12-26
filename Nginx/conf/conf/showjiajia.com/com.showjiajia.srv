@@ -1,0 +1,52 @@
+#s.showjiajia.com
+server
+{
+    server_name srv.showjiajia.com;
+    listen 80;
+    charset utf8;
+    index index.html index.htm;
+    error_page      404 500 502 503 504  /50x.html;
+    access_log on;
+    access_log /data/nginx/logs/com.showjiajia.srv.access.log main;
+
+    location = /50x.html {
+        internal;
+        root html;
+    }
+    location / {
+
+###############解决  跨域请求问题###################
+        if ($request_method = 'OPTIONS') {
+            add_header Access-Control-Allow-Origin 'http://www.showjiajia.com';
+            add_header Access-Control-Allow-Credentials true;
+            add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,X_FILENAME';
+            return 200;
+        }
+
+        if ($request_method = 'POST') {
+            add_header 'Access-Control-Allow-Origin' 'http://www.showjiajia.com';
+            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,X_FILENAME';
+        }
+
+        if ($request_method = 'GET') {
+            add_header 'Access-Control-Allow-Origin' 'http://www.showjiajia.com';
+            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,X_FILENAME';
+        }
+        #add_header 'Access-Control-Allow-Origin' *.showjiajia.com;
+        #add_header 'Access-Control-Allow-Credentials' true;
+        #add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        #add_header 'Access-Control-Allow-Headers' 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+###############解决  跨域请求问题###################
+
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://lb_service/;
+    }
+}

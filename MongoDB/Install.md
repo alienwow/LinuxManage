@@ -2,13 +2,13 @@
 下载mongodb v2.6.10 到 /softwares 目录
 
 ## 开始安装
-1、添加用户及群组
+### 1、添加用户及群组
 ```bash
 groupadd mongodb
 useradd -g mongodb -s /sbin/nologin mongodb
 ```
 
-2、准备 mongodb 目录
+### 2、准备 mongodb 目录
 ```bash
 mkdir -p /usr/local/mongodb/repair
 mkdir -p /data/mongodb/logs/
@@ -18,7 +18,7 @@ chown -R mongodb:mongodb /data/mongodb
 chmod -R 744 /data/mongodb
 ```
 
-3、安装
+### 3、安装
 ```bash
 cd /softwares
 tar zxf /softwares/mongodb-linux-x86_64-2.6.10.tgz
@@ -26,29 +26,25 @@ mv /softwares/mongodb-linux-x86_64-2.6.10 /walkingtec/mongodb
 chown -R mongodb:mongodb /walkingtec/mongodb
 ```
 
-4、配置mongodb 配置文件
+### 4、配置mongodb 配置文件
 ```bash
 touch /etc/mongodb.conf
 chmod 744 /etc/mongodb.conf
 ```
 
-5、添加 mongodb 启动脚本
+### 5、添加 mongodb 启动脚本 并 设置开机启动
 ```bash
 # 先添加启动脚本
 vi /etc/init.d/mongod
 # 增加服务
 chown mongodb:mongodb /etc/init.d/mongod
 chmod 755 /etc/init.d/mongod
-################################################################################
-```
-
-6、设置开机启动
-```bash
+# 设置开机启动
 chkconfig --add mongod
 chkconfig --level 345 mongod on
 ```
 
-7、配置mongodb 用户及权限
+### 6、配置mongodb 用户及权限
 ```bash
 # 链接mongodb
 /walkingtec/mongodb/bin/mongo 127.0.0.1:7006/admin
@@ -95,7 +91,7 @@ chkconfig --level 345 mongod on
 /walkingtec/mongodb/bin/mongo 127.0.0.1:7006/admin -u admin -p
 ```
 
-8、连接 mongodb与认证
+### 7、连接 mongodb与认证
 ```bash
 /walkingtec/mongodb/bin/mongo 10.161.219.94:7006/quietly -u quietly_admin -p bpo_123
 /walkingtec/mongodb/bin/mongo 10.161.219.94:7006/admin -u admin -p walkingtec_0327
@@ -108,12 +104,12 @@ db.auth('admin','walkingtec_0327')
 db.MemberAccount.remove({"ID":"170f89b8-9e22-11e5-ba15-00163e001096"})
 ```
 
-9、备份
+### 8、备份
 ```bash
 /walkingtec/mongodb/bin/mongodump -h 10.161.219.94:7006 -d quietly -u quietly_admin -p bpo_123 -o /data/backup
 ```
 
-10、监控
+### 9、监控
 ```bash
 # mongostat监控
 /walkingtec/mongodb/bin/mongostat -h 10.161.219.94:7006 -u admin -p walkingtec_0327

@@ -3,13 +3,13 @@
     
 
 ## 开始安装
-1、添加用户及群组
+### 1、添加用户及群组
 ```bash
 groupadd redis
 useradd -g redis -s /sbin/nologin redis
 ```
 
-2、准备 redis 目录
+### 2、准备 redis 目录
 ```bash
 mkdir -p /walkingtec/redis
 mkdir -p /data/redis/logs
@@ -19,7 +19,7 @@ chown -R redis:redis /data/redis
 chmod -R 755 /data/redis
 ```
 
-3、安装
+### 3、安装
 ```bash
 cd /softwares
 tar xzf redis-4.0.6.tar.gz
@@ -35,32 +35,28 @@ mv /softwares/redis-4.0.6/src/redis-benchmark /walkingtec/redis/redis-benchmark
 cd /walkingtec/redis
 ```
 
-4、配置 redis 配置文件
+### 4、配置 redis 配置文件
 ```bash
 vi /walkingtec/redis/redis.conf
 ```
 
-5、添加 redis 启动脚本
+### 5、添加 redis 启动脚本 并 设置开机启动
 ```bash
 # 先添加启动脚本
 vi /etc/init.d/redis
 # 增加服务
 chmod 755 /etc/init.d/redis
-################################################################################
-```
-
-6、设置在开机启动
-```bash
+# 设置开机启动
 chkconfig --add redis
 chkconfig --level 345 redis on
 ```
 
-7、运行时修改环境配置 CONFIG SET
+### 6、运行时修改环境配置 CONFIG SET
 ```bash
 config set tcp-keepalive 60
 ```
 
-8、其他
+### 7、其他
 ```
 高性能网站架构设计之缓存篇（5）- Redis 集群（上）
 http://www.cnblogs.com/zhaoguihua/p/redis-005.html

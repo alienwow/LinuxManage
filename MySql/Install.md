@@ -10,20 +10,20 @@
 [MySQL-client-5.6.20-1.el6.x86_64.rpm](http://ftp.ntu.edu.tw/MySQL/Downloads/MySQL-5.6/MySQL-client-5.6.20-1.el6.x86_64.rpm)
 
 ## 开始安装
-1、卸载原有的 mysql
+### 1、卸载原有的 mysql
 ```bash
 rpm -qa | grep -i mysql
 # 如果安装了先卸载旧的版本    
 yum -y remove mysql
 ```
 
-2、添加用户及群组
+### 2、添加用户及群组
 ```bash
 groupadd mysql
 useradd -g mysql -s /sbin/nologin mysql
 ```
 
-3、开始安装
+### 3、开始安装
 ```bash
 cd /softwares
 rpm -ivh MySQL-server-5.6.20-1.el6.x86_64.rpm
@@ -41,7 +41,7 @@ rpm -ivh libaio-0.3.107-10.el6.x86_64.rpm
 ```
 
 ## 配置 MySql 运行环境
-1、创建目录及文件
+### 1、创建目录及文件
 ```bash
 mkdir -p /data/mysql/logs
 mkdir -p /data/mysql/db
@@ -55,12 +55,12 @@ chmod -R 755 /data/mysql
 chmod -R 755 /data/mysql/logs
 ```
 
-2、启动 mysql
+### 2、启动 mysql
 ```bash
 service mysql start
 ```
 
-3、配置 mysql root用户密码
+### 3、配置 mysql root用户密码
 ```bash
 service mysql stop
 mysqld_safe --user=mysql --skip-grant-tables --skip-networking
@@ -79,7 +79,7 @@ mysql -uroot -p
 service mysql restart
 ```
 
-3、 设置开机启动
+### 4、 设置开机启动
 ```bash
 chkconfig --add mysql
 chkconfig --level 345 mysql on

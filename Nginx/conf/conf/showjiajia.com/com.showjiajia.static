@@ -1,0 +1,43 @@
+#static.showjiajia.com
+server
+{
+    server_name static.showjiajia.com;
+    listen 80;
+    charset utf8;
+    index index.html index.htm;
+    error_page      404 500 502 503 504  /error.html;
+    access_log off;
+    #access_log /data/nginx/logs/static.log;
+
+    ssi on;
+    ssi_silent_errors on;
+
+    #add_header Cache-Control public,max-age=315360000;
+    add_header Access-Control-Allow-Origin *;
+
+    location = /50x.html {
+        #internal;
+        root /home/nginx/wwwroot/static/;
+    }
+    location ~* \*.(gif|jpg|jpeg|png|bmp|swf|ioc|rar|zip|txt|flv|mid|doc|ppt|pdf|xls|mp3|wma)$ {
+        if (-f $request_filename) {
+            root  /home/nginx/wwwroot/static/;
+            expires 10d;
+            break;
+        }
+    }
+    location ~* \*.(js|css)?$ {
+        if (-f $request_filename) {
+            root  /home/nginx/wwwroot/static/;
+            expires 10d;
+            break;
+        }
+    }
+    location / {
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        root /home/nginx/wwwroot/static;
+    }
+}
