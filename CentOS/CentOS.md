@@ -6,6 +6,8 @@
 /walkingtec
 # 软件数据目录
 /data
+# 网站目录
+/websites
 ```
 
 ## 修改yum源为阿里源

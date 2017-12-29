@@ -21,34 +21,36 @@ vi /etc/sysconfig/network-scripts/ifcfg-eth0
 # 默认配置
 ################################################################
 # 网卡对应的设备别名
-DEVICE=eth0
+DEVICE="eth0"
 # 网卡获得ip地址的方式（默认为dhcp，表示自动获取） none、static、dhcp
 # 设置未 none 重启后会自动联网
-BOOTPROTO=static
-TYPE=Ethernet
-UUID=fb949c96-65be-4a2e-97b0-9a5da6a8f0f1
+BOOTPROTO="none"
+TYPE="Ethernet"
+UUID="d9beb10d-6984-42d3-947e-faab129e326d"
 # 系统启动时是否激活此设备
-ONBOOT=yes
-NM_CONTROLLED=yes
-PREFIX=24
+ONBOOT="yes"
 
 # 网卡MAC地址（物理地址）
-HWADDR=00:15:5D:40:3B:14
-IPADDR=192.168.2.101
+IPADDR="192.168.2.103"
+PREFIX="24"
 # 网关
-GATEWAY=192.168.2.1
+GATEWAY="192.168.2.1"
 # 主DNS
-DNS1=192.168.2.1
+DNS1="10.96.1.18"
 # 备DNS
-DNS2=192.168.2.1
+DNS2="10.96.1.19"
 
-DEFROUTE=yes
-PEERDNS=yes
-PEERROUTES=res
-IPV4_FAILURE_FATAL=yes
+DEFROUTE="yes"
+IPV4_FAILURE_FATAL="no"
+PROXY_METHOD="none"
+BROWSER_ONLY="no"
 # 禁止IPV6
-IPV6INIT=no
-NAME="System eth0"
+IPV6INIT="no"
+IPV6_AUTOCONF="yes"
+IPV6_DEFROUTE="yes"
+IPV6_FAILURE_FATAL="no"
+IPV6_ADDR_GEN_MODE="stable-privacy"
+NAME="eth0"
 ################################################################
 # 重启网卡
 service network restart
