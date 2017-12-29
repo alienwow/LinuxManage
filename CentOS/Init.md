@@ -5,6 +5,7 @@
 mkdir /walkingtec
 mkdir /softwares
 mkdir /data
+mkdir /websites
 ```
 
 ### 安装编译环境等必用软件
