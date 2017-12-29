@@ -1,3 +1,13 @@
+## 关闭 SELINUX
+```bash
+# 注释 SELINUXTYPE 并把 SELINUX改为disabled
+vi /etc/selinux/config
+#SELINUX=enforcing
+#SELINUXTYPE=targeted
+SELINUX=disabled
+# 重启服务器
+```
+
 ## 文件系统
 ``` bash
 # 软件安装文件目录
