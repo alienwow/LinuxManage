@@ -19,9 +19,15 @@ yum -y install pcre*
 yum -y install openssl*
 ```
 
-
 ## 3、卸载  mariadb
 ```bash
 rpm -qa | grep -i mariadb
 rpm -e --nodeps mariadb-libs-5.5.56-2.el7.x86_64
+```
+
+## 4、添加SSH
+```bash
+# 上传公钥
+# 将公钥转存到 authorized_keys 中
+cat ~/.ssh/id_rsa.pub >> authorized_keys
 ```

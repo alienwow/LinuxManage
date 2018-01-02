@@ -19,10 +19,16 @@ yum -y install pcre*
 yum -y install openssl*
 ```
 
-
 ## 3、卸载  mariadb
 ```bash
 rpm -qa | grep -i mysql
 # 如果安装了先卸载旧的版本    
 yum -y remove mysql
+```
+
+## 4、添加SSH
+```bash
+# 上传公钥
+# 将公钥转存到 authorized_keys 中
+cat ~/.ssh/id_rsa.pub >> authorized_keys
 ```
