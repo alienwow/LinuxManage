@@ -10,7 +10,21 @@ SELINUX=disabled
 # 重启服务器
 ```
 
-## 2、安装常用工具库
+## 2、卸载 Firewall 并安装 iptables 防火墙
+```bash
+# 停止 firewall 
+systemctl stop firewalld.service
+# 禁止 firewall 开机启动 
+systemctl disable firewalld.service
+# 安装
+yum install iptables-services
+# 启动/关闭/重启 防火墙
+systemctl start iptables.service
+# 开机启动
+systemctl enable iptables.service
+```
+
+## 3、安装常用工具库
 ```bash
 yum -y install wget gcc-c++ zlib zlib-devel openssl openssl-devel pcre pcre-devel
 # 支持rewrite，安装pcre:
@@ -19,13 +33,13 @@ yum -y install pcre*
 yum -y install openssl*
 ```
 
-## 3、卸载  mariadb
+## 4、卸载  mariadb
 ```bash
 rpm -qa | grep -i mariadb
 rpm -e --nodeps mariadb-libs-5.5.56-2.el7.x86_64
 ```
 
-## 4、添加SSH
+## 5、添加SSH
 ```bash
 # 上传公钥
 # 将公钥转存到 authorized_keys 中

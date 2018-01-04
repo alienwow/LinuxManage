@@ -1,12 +1,12 @@
 #网络防火墙安装
 ``` bash
 # 停止firewall 
-systemctl stop firewall.service
+systemctl stop firewalld.service
 # 禁止firewall开机启动 
-systemctl disable firewall.service
+systemctl disable firewalld.service
 
 # 安装
-yum install iptables-service
+yum install iptables-services
 
 # 添加配置
 vi /etc/sysconfig/iptables
