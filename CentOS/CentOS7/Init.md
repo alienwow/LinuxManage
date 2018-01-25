@@ -42,6 +42,8 @@ rpm -e --nodeps mariadb-libs-5.5.56-2.el7.x86_64
 ## 5、添加SSH
 ```bash
 # 上传公钥
+ssh root@10.100.82.157 "mkdir ~/.ssh"
+scp /c/Users/Wenhao.Wu/.ssh/id_rsa.pub root@10.100.82.157:~/.ssh/id_rsa.pub
 # 将公钥转存到 authorized_keys 中
-cat ~/.ssh/id_rsa.pub >> authorized_keys
+ssh root@10.100.82.157 "cat ~/.ssh/id_rsa.pub >> authorized_keys"
 ```
