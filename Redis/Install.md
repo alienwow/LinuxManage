@@ -38,6 +38,7 @@ cd /walkingtec/redis
 ### 4、配置 redis 配置文件
 ```bash
 vi /walkingtec/redis/redis.conf
+# 当需要使用supervisor来监控的时候 设置为 daemonize no
 ```
 
 ### 5、添加 redis 启动脚本 并 设置开机启动
