@@ -19,7 +19,7 @@ yum -y install pcre*
 yum -y install openssl*
 ```
 
-## 3、卸载  mariadb
+## 3、卸载  mysql
 ```bash
 rpm -qa | grep -i mysql
 # 如果安装了先卸载旧的版本    
