@@ -45,7 +45,11 @@ vi /walkingtec/redis/redis.conf
 # 先添加启动脚本
 vi /etc/init.d/redis
 # 增加服务
+chown redis:redis /etc/init.d/redis
 chmod 755 /etc/init.d/redis
+# CentOS7下要重新加载
+systemctl daemon-reload
+
 # 设置开机启动
 chkconfig --add redis
 chkconfig --level 345 redis on

@@ -55,6 +55,8 @@ vi /etc/init.d/nginx
 # 增加服务
 chown nginx:nginx /etc/init.d/nginx
 chmod 755 /etc/init.d/nginx
+# CentOS7下要重新加载
+systemctl daemon-reload
 # 设置开机启动
 chkconfig --add nginx
 chkconfig --level 345 nginx on
