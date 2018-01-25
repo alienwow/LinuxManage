@@ -1,5 +1,4 @@
-## 开始安装
-### 1、安装
+## 1、安装
 ```bash
 mkdir -p /data/logs
 yum install python-setuptools
@@ -9,7 +8,7 @@ pip install supervisor
 pip uninstall supervisor
 ```
 
-### 2、配置
+## 2、配置
 ```bash
 mkdir -p /sundot/supervisor/conf
 echo_supervisord_conf > /sundot/supervisor/supervisord.conf
@@ -29,7 +28,7 @@ supervisorctl -c /sundot/supervisor/supervisord.conf
 supervisorctl -c /sundot/supervisor/supervisord.conf reload
 ```
 
-### 3、设置 supervisor 开机启动
+## 3、设置 supervisor 开机启动
 ```bash
 # 方式1
     # 进入/lib/systemd/system目录，并创建supervisor.service文件
