@@ -29,8 +29,8 @@ yum -y remove mysql
 ## 4、添加SSH
 ```bash
 # 上传公钥
-ssh root@10.100.82.157 "mkdir ~/.ssh"
-scp /c/Users/Wenhao.Wu/.ssh/id_rsa.pub root@10.100.82.157:~/.ssh/id_rsa.pub
+ssh root@60.10.194.195 -p 22 "mkdir ~/.ssh" 
+scp -P 22 /c/Users/Wenhao.Wu/.ssh/id_rsa.pub root@60.10.194.195:~/.ssh/id_rsa.pub
 # 将公钥转存到 authorized_keys 中
-ssh root@10.100.82.157 "cat ~/.ssh/id_rsa.pub >> authorized_keys"
+ssh root@60.10.194.195 -p 22 "cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys"
 ```
