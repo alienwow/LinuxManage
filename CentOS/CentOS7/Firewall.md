@@ -1,4 +1,24 @@
-#网络防火墙安装
+# 网络防火墙安装
+
+## 使用CentOS7自带的firewall
+```bash
+# 管理firewall  [start/stop/restart/status]
+service firewall start
+
+# 查看防火墙状态
+iptables -L
+
+# 开启80端口查看是否开启80端口
+firewall-cmd --query-port=80/tcp
+
+# 开启80端口
+firewall-cmd --add-port=80/tcp
+
+#
+
+```
+
+## 使用 iptables
 ``` bash
 # 停止firewall 
 systemctl stop firewalld.service
