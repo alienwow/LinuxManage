@@ -8,13 +8,20 @@ service firewall start
 # 查看防火墙状态
 iptables -L
 
+# 查看所有打开的端口
+firewall-cmd --zone=public --list-ports
+
 # 开启80端口查看是否开启80端口
-firewall-cmd --query-port=80/tcp
+firewall-cmd --zone=public --query-port=80/tcp
 
 # 开启80端口
-firewall-cmd --add-port=80/tcp
+firewall-cmd --zone=public --add-port=80/tcp --permanent    （--permanent永久生效，没有此参数重启后失效）
 
-#
+# 关闭80端口
+firewall-cmd --zone=public --remove-port=80/tcp --permanent
+
+# 重新载入防火墙
+firewall-cmd --reload
 
 ```
 
