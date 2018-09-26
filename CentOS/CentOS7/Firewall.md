@@ -11,7 +11,7 @@ iptables -L
 # 查看所有打开的端口
 firewall-cmd --zone=public --list-ports
 
-# 开启80端口查看是否开启80端口
+# 查看是否开启80端口
 firewall-cmd --zone=public --query-port=80/tcp
 
 # 开启80端口
