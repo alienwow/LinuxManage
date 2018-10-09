@@ -77,3 +77,15 @@ export PATH=/walkingtec/ffmpeg/include/:$PATH
 export PATH=/walkingtec/ffmpeg/lib/:$PATH
 
 ```
+
+
+
+## 递归查找并删除文件
+```bash
+# 递归查找文件
+find /data/websites/ -name "*.map.gz"
+
+# 递归删除文件
+find /data/websites/ -name "*.map.gz" |xargs rm -rf
+
+```
