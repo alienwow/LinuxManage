@@ -18,8 +18,6 @@ curl -sSL https://get.docker.com/ | sh
 # 4、启动docker服务。
 # 启动
 sudo service docker start
-# 开机启动
-systemctl enable docker.service
 
 # 5、确认docker安装成功。
 sudo docker run hello-world
@@ -61,7 +59,7 @@ sudo usermod -aG docker docker
 
 ## docker服务自动启动
 ```bash
-sudo chkconfig docker on 
+systemctl enable docker.service
 ```
 
 ## 卸载docker
