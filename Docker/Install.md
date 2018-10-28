@@ -16,7 +16,10 @@ sudo yum update
 curl -sSL https://get.docker.com/ | sh 
 
 # 4、启动docker服务。
+# 启动
 sudo service docker start
+# 开机启动
+systemctl enable docker.service
 
 # 5、确认docker安装成功。
 sudo docker run hello-world
