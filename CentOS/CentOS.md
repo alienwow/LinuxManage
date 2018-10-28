@@ -8,6 +8,25 @@ SELINUX=disabled
 # 重启服务器
 ```
 
+## 修改 HostName
+```bash
+# 查看 
+hostname
+cat /proc/sys/kernel/hostname
+
+# 修改1
+hostname [new Host Name]
+
+# 修改2
+vi /etc/sysconfig/network
+## 修改配置 localhost.localdomain 修改为[new Host Name]
+
+# 修改3
+vi /etc/hosts
+## 添加如下配置 HOSTNAME=[new Host Name]
+
+```
+
 ## 文件系统
 ``` bash
 # 软件安装文件目录
