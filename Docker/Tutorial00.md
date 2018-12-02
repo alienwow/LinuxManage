@@ -73,7 +73,13 @@ docker rm [ContainerId]
 docker rm $(docker ps -a -q)
 ```
 
+## ASPNetCore + Docker
 
+### build
+docker build -t snowleopard.webapi .
+
+### run
+docker run --name snowleopard.webapi  -p 8080:80 snowleopard.webapi
 
 
 

@@ -37,6 +37,36 @@ sudo docker run hello-world
 
 ```
 
+## yum安装
+```bash
+# 更新系统
+sudo yum update
+
+# 卸载旧版本(如果安装过旧版本的话)
+sudo yum remove docker  docker-common docker-selinux docker-engine
+
+# 安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+
+# 设置yum源
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+# 可以查看所有仓库中所有docker版本，并选择特定版本安装
+yum list docker-ce --showduplicates | sort -r
+
+# 安装docker
+sudo yum install docker-ce  #由于repo中默认只开启stable仓库，故这里安装的是最新稳定版17.12.0
+sudo yum install <FQPN>  # 例如：sudo yum install docker-ce-17.12.0.ce
+
+# 启动并加入开机启动
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# 验证安装是否成功(有client和service两部分表示docker安装启动都成功了)
+docker version
+
+```
+
 ## 配置 docker
 ```bash
 # docker的默认配置文件路径是 /etc/docker/daemon.json
@@ -44,7 +74,7 @@ sudo docker run hello-world
 mkdir -p /etc/docker
 tee /etc/docker/daemon.json <<-'EOF'
 {
-  "registry-mirrors": ["https://ljcq9oc9.mirror.aliyuncs.com"]
+  "registry-mirrors": ["https://registry.docker-cn.com","https://ljcq9oc9.mirror.aliyuncs.com"]
 }
 EOF
 systemctl daemon-reload
