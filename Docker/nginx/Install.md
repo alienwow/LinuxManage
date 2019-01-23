@@ -1,58 +1,30 @@
 
-## 拉取镜像
-```bash
-docker pull nginx
-```
+# 拉取镜像
 
-## 启动与停止容器
 ```bash
-# 启动容器
-# -d        后台运行
-# -p        容器的 80 端口映射到 172.27.0.15:80
-# --rm      容器停止运行后，自动删除容器文件
-# --name    定义容器名字
-docker container run \
+# 拉取最新的官方 nginx 镜像
+docker pull nginx:1.15.8
+
+# 创建目录
+mkdir -p /Users/vito/data/nginx/logs
+
+# 启动 nginx 容器
+docker run \
+--name nginx \
+-p 80:80 \
+-v /Users/vito/data/nginx/conf:/etc/nginx \
+-v /Users/vito/data/nginx/html:/usr/share/nginx/html \
+-v /Users/vito/data/nginx/logs:/nginx/logs \
 -d \
--p 172.27.0.15:80:80 \
---rm \
---name vitoNginx \
-nginx
+nginx:1.15.8
 
-# 停止容器
-docker container stop vitoNginx
-```
-
-## 映射网页目录到本地
-```bash
-
-# --volume  将 /usr/share/nginx/html 映射到本地目录 /data/websites/www
-docker container run \
--d \
--p 172.27.0.15:80:80 \
---rm \
---name vitoNginx \
---volume "/data/websites/www":/usr/share/nginx/html \
-nginx
-
-```
-
-## 将 nginx 配置拷贝到本地目录，并映射
-```bash
-# 将 container 上 nginx 的配置拷贝到 /vito/nginx 配置
-mkdir /vito
-cd /vito
-docker container cp vitoNginx:/etc/nginx .
-
-docker container run \
--d \
--p 172.27.0.15:80:80 \
---rm \
---name vitoNginx \
---volume "/data/websites/www":/usr/share/nginx/html \
---volume "/vito/nginxConf/nginx":/etc/nginx \
-nginx
+# 复制 html 目录
+docker cp nginx:/usr/share/nginx/html /Users/vito/data/nginx
+# 复制配置目录
+docker cp nginx:/etc/nginx /Users/vito/data/nginx
+mv /Users/vito/data/nginx/nginx /Users/vito/data/nginx/conf
 
 # nginx 重新加载配置文件
-docker exec -it vitoNginx /etc/init.d/nginx reload
+docker exec -it nginx /etc/init.d/nginx reload
 
 ```
