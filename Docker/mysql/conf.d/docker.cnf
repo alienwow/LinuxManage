@@ -1,0 +1,50 @@
+[mysqld]
+skip-host-cache
+skip-name-resolve
+
+explicit_defaults_for_timestamp
+
+log-output = FILE
+log-error = /mysql/logs/mysql.err
+#log-bin = /mysql/logs/sortrepl.log
+slow_query_log_file = /mysql/logs/slowquery.log
+general-log=0
+general_log_file = /mysql/logs/general.log
+
+max_connect_errors = 100
+max_connections = 151
+
+#字符集
+character-set-server = utf8
+#忽略大小写
+lower_case_table_names = 1
+
+sql_mode = NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+join_buffer_size = 256K
+sort_buffer_size = 1024K
+default_tmp_storage_engine = InnoDB
+default-storage-engine = InnoDB
+binlog-row-event-max-size = 8K
+long_query_time = 10
+innodb_flush_log_at_trx_commit = 1
+innodb_open_files = 300
+innodb_log_buffer_size = 4M
+innodb_thread_concurrency = 17
+innodb_checksum_algorithm = crc32
+innodb_buffer_pool_instances = 8
+innodb_autoextend_increment = 64
+innodb_log_file_size = 256M
+innodb_old_blocks_time = 1000
+innodb_buffer_pool_size = 256M
+innodb_compression_pad_pct_max = 50
+back_log = 80
+max_allowed_packet = 32M
+thread_cache_size = 10
+read_buffer_size = 64K
+read_rnd_buffer_size = 256K
+open-files-limit = 4161
+table_definition_cache = 1400
+table_open_cache = 2000
+myisam_sort_buffer_size = 102M
+key_buffer_size = 8M
+myisam_max_sort_file_size = 100G
