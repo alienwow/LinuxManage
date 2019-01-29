@@ -10,6 +10,8 @@ docker pull mysql:8.0.13
 # 启动 mysql-server 容器
 docker run -p 7002:3306 -p 33060:33060 --name mysql -v /Users/vito/data/mysql/conf.d:/etc/mysql/conf.d -v /Users/vito/data/mysql/logs:/mysql/logs -v /Users/vito/data/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=abcd-1234 -d mysql:8.0.13
 
+docker run -p 3306:3306 --name mysql5.7 -e MYSQL_ROOT_PASSWORD=abcd-1234 -d mysql:5.7
+
 # 复制 mysql 配置
 # 完成配置路径 /etc/mysql/，自定义配置放在 /etc/mysql/conf.d/
 docker cp mysql:/etc/mysql/conf.d /Users/vito/data/mysql
