@@ -1,10 +1,17 @@
 ## 磁盘分区：
+
 ### 1、查看磁盘
+
 ```bash
 fdisk -l
 fdisk -l <磁盘>
+# 查看磁盘使用率
+du --max-depth=1 -h
+
 ```
+
 ### 2、开始分区
+
 ```bash
 fdisk /dev/xvdb
 # 操作命令符
@@ -14,11 +21,15 @@ fdisk /dev/xvdb
 # q、退出不保存。
 # w、把分区写进分区表，保存并退出
 ```
+
 ### 3、格式化硬盘
+
 ```bash
 mkfs -t ext4 /dev/xvdb1
 ```
+
 ### 4、挂载分区
+
 ```bash
 vi /etc/fstab
 # 然后添加即可
@@ -30,6 +41,7 @@ vi /etc/fstab
 ## 逻辑分区
 
 ### 删除逻辑分区
+
 ```bash
 # 先卸载逻辑分区
 umount /home
@@ -38,6 +50,7 @@ lvremove /dev/mapper/centos-home
 ```
 
 ### 开始重新分区
+
 ```bash
 # 查看卷组信息
 vgdisplay
@@ -52,11 +65,13 @@ mkfs.xfs /dev/centos/data
 ```
 
 ### 查看逻辑卷信息
+
 ```bash
 lvdisplay
 ```
 
 ### 挂载分区
+
 ```bash
 vi /etc/fstab
 ######添加配置####################################################################
