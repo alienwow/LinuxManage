@@ -12,9 +12,11 @@ mkdir -p /Users/vito/data/nginx/logs
 docker run \
 --name nginx \
 -p 80:80 \
+-p 443:443 \
 -v /Users/vito/data/nginx/conf:/etc/nginx \
 -v /Users/vito/data/nginx/html:/usr/share/nginx/html \
 -v /Users/vito/data/nginx/logs:/nginx/logs \
+-v /Users/vito/repos/RongCloud/desktop-client:/nginx/www \
 -d \
 nginx:1.15.8
 
