@@ -1,9 +1,10 @@
 # 网络防火墙安装
 
 ## 使用CentOS7自带的firewall
+
 ```bash
 # 管理firewall  [start/stop/restart/status]
-service firewall start
+service firewalld start
 
 # 查看防火墙状态
 iptables -L
@@ -15,7 +16,8 @@ firewall-cmd --zone=public --list-ports
 firewall-cmd --zone=public --query-port=80/tcp
 
 # 开启80端口
-firewall-cmd --zone=public --add-port=80/tcp --permanent    （--permanent永久生效，没有此参数重启后失效）
+# (--permanent永久生效，没有此参数重启后失效）
+firewall-cmd --zone=public --add-port=80/tcp --permanent
 
 # 关闭80端口
 firewall-cmd --zone=public --remove-port=80/tcp --permanent
@@ -26,11 +28,13 @@ firewall-cmd --reload
 ```
 
 ## 使用 iptables
+
 ``` bash
-# 停止firewall 
+# 停止firewall
 systemctl stop firewalld.service
-# 禁止firewall开机启动 
+# 禁止firewall开机启动
 systemctl disable firewalld.service
+systemctl enable firewalld.service
 
 # 安装
 yum install iptables-services
