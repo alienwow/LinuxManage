@@ -6,13 +6,13 @@
 # description: Nginx daemon
 #
 # processname: nginx
-# config: /walkingtec/nginx/nginx.conf
-# pidfile: /data/nginx/nginx.pid
+# config: /usr/local/nginx/conf/nginx.conf
+# pidfile: /usr/local/nginx/logs/nginx.pid
 
 source /etc/init.d/functions
-BIN="/walkingtec/nginx/sbin"
-CONFIG="/walkingtec/nginx/nginx.conf"
-PIDFILE="/data/nginx/nginx.pid"
+BIN="/usr/local/nginx/sbin"
+CONFIG="/usr/local/nginx/conf/nginx.conf"
+PIDFILE="/usr/local/nginx/logs/nginx.pid"
 ### Read configuration
 [ -r "$SYSCONFIG" ] && source "$SYSCONFIG"
 RETVAL=0
