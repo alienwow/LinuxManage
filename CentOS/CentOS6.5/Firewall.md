@@ -1,4 +1,5 @@
-#网络防火墙安装
+# 网络防火墙安装
+
 ``` bash
 # 安装
 yum install iptables
@@ -22,5 +23,4 @@ vi /etc/sysconfig/iptables
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
 #################################################################
-
 ```

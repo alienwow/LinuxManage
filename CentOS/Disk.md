@@ -1,6 +1,6 @@
-## 磁盘分区：
+# 磁盘分区
 
-### 1、查看磁盘
+## 1、查看磁盘
 
 ```bash
 fdisk -l
@@ -10,7 +10,7 @@ du --max-depth=1 -h
 
 ```
 
-### 2、开始分区
+## 2、开始分区
 
 ```bash
 fdisk /dev/xvdb
@@ -22,13 +22,13 @@ fdisk /dev/xvdb
 # w、把分区写进分区表，保存并退出
 ```
 
-### 3、格式化硬盘
+## 3、格式化硬盘
 
 ```bash
 mkfs -t ext4 /dev/xvdb1
 ```
 
-### 4、挂载分区
+## 4、挂载分区
 
 ```bash
 vi /etc/fstab
@@ -40,13 +40,12 @@ vi /etc/fstab
 
 ## 逻辑分区
 
-### 删除逻辑分区
+http://www.cnblogs.com/ssslinppp/p/5853312.html
+
+### 查看逻辑卷信息
 
 ```bash
-# 先卸载逻辑分区
-umount /home
-# 删除逻辑分区
-lvremove /dev/mapper/centos-home
+lvdisplay
 ```
 
 ### 开始重新分区
@@ -64,10 +63,13 @@ mkfs.xfs /dev/centos/home
 mkfs.xfs /dev/centos/data
 ```
 
-### 查看逻辑卷信息
+### 删除逻辑分区
 
 ```bash
-lvdisplay
+# 先卸载逻辑分区
+umount /home
+# 删除逻辑分区
+lvremove /dev/mapper/centos-home
 ```
 
 ### 挂载分区

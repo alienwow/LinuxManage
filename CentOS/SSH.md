@@ -1,18 +1,27 @@
-## 生成 rsa 公私钥
-```bash
-ssh-keygen -t rsa
-```
+# 生成 rsa 公私钥
 
-## 私钥设置
+## 生成公私钥
+
 ```bash
-# 将私钥保存到当前用户的家目录下的 .ssh 目录中
+ssh-keygen -t rsa -C "wuwenhao0327@gmail.com"
+# 默认生成到 ~/.ssh 目录下
+# 生成两个文件：
+# 1. id_rsa         私钥
+# 2. id_rsa.pub     公钥
 ```
 
 ## 公钥设置
+
 ```bash
+
+iphost=60.10.194.195
+port=22
+
 # 上传公钥
-ssh root@60.10.194.195 -p 22 "mkdir ~/.ssh" 
-scp -P 22 /c/Users/Wenhao.Wu/.ssh/id_rsa.pub root@60.10.194.195:~/.ssh/id_rsa.pub
+ssh root@$ipHost -p $port "mkdir ~/.ssh"
+scp -P $port ~/.ssh/id_rsa.pub root@$ipHost:~/.ssh/id_rsa.pub
+
 # 将公钥转存到 authorized_keys 中
-ssh root@60.10.194.195 -p 22 "cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys"
+ssh root@$ipHost -p $port "cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys"
+
 ```

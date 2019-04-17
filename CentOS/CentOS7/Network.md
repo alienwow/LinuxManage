@@ -1,4 +1,5 @@
-## 网卡设置
+# 网卡设置
+
 ``` bash
 # # 配置网卡，需要重启服务器
 # vi /etc/udev/rules.d/70-persistent-net.rules
@@ -7,6 +8,7 @@
 ```
 
 ## Host
+
 ``` bash
 # 设置 Host 及 Gateway
 vi /etc/sysconfig/network
@@ -25,6 +27,7 @@ vi /etc/hosts
 ```
 
 ## 配置DNS
+
 ```bash
 vi /etc/resolv.conf
 # 默认配置
@@ -37,6 +40,7 @@ nameserver 10.96.1.19
 ```
 
 ## 网络配置
+
 ``` bash
 # 设置网络配置
 vi /etc/sysconfig/network-scripts/ifcfg-eth0
