@@ -8,6 +8,9 @@ fdisk -l <磁盘>
 # 查看磁盘使用率
 du --max-depth=1 -h
 
+# docker 下
+du -sh *
+
 ```
 
 ## 2、开始分区
