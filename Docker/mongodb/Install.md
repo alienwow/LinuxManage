@@ -5,7 +5,8 @@
 # 创建目录
 mkdir -p /Users/vito/data/mongodb/conf
 mkdir -p /Users/vito/data/mongodb/data
-mkdir -p /Users/vito/data/mongodb/logs
+mkdir -p /Users/vito/data/mongodb/logs/mongodb.log
+touch /Users/vito/data/mongodb/logs/mongodb.log
 
 # 拉取最新的官方 mongo 镜像
 docker pull mongo:4.1

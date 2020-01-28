@@ -1,4 +1,7 @@
+# Install
+
 ## 依赖性检查
+
 ```bash
 # Docker需要一个64位系统的红帽系统，内核的版本必须大于3.10。可以用下面的命令来检查是否满足docker的要求。
 # 3.10.0-229.el7.x86_64
@@ -6,6 +9,7 @@ uname -r
 ```
 
 ## 使用安装脚本安装
+
 ```bash
 # 1、使用一个有sudo权限的帐号登录红帽系统。
 
@@ -13,7 +17,7 @@ uname -r
 sudo yum update
 
 # 3、执行docker安装脚本。
-curl -sSL https://get.docker.com/ | sh 
+curl -sSL https://get.docker.com/ | sh
 
 # 4、启动docker服务。
 # 启动
@@ -38,6 +42,7 @@ sudo docker run hello-world
 ```
 
 ## yum安装
+
 ```bash
 # 更新系统
 sudo yum update
@@ -68,6 +73,7 @@ docker version
 ```
 
 ## 配置 docker
+
 ```bash
 # docker的默认配置文件路径是 /etc/docker/daemon.json
 # 默认不存在需要手动创建
@@ -82,17 +88,20 @@ service docker restart
 ```
 
 ## 添加用户及群组
+
 ```bash
 useradd -g docker -s /sbin/nologin docker
 sudo usermod -aG docker docker
 ```
 
 ## docker服务自动启动
+
 ```bash
 systemctl enable docker.service
 ```
 
 ## 卸载docker
+
 ```bash
 # 1、列出docker包的具体的名字。
 yum list installed | grep docker

@@ -49,12 +49,12 @@ docker commit [ContainerId] [ImageName]
 # 先在阿里云后台创建仓库 [仓库名]
 docker login --username=wuwenhao0327@gmail.com registry.cn-hangzhou.aliyuncs.com
 docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/alienwow/[仓库名]:[镜像版本号]
-docker docker push registry.cn-hangzhou.aliyuncs.com/alienwow/[仓库名]:[镜像版本号]
+docker push registry.cn-hangzhou.aliyuncs.com/alienwow/[仓库名]:[镜像版本号]
 
 ```
 
-
 ### 容器管理
+
 ```bash
 # 列出所有运行的容器
 docker ps -a
@@ -76,9 +76,11 @@ docker rm $(docker ps -a -q)
 ## ASPNetCore + Docker
 
 ### build
+
 docker build -t snowleopard.webapi .
 
 ### run
+
 docker run --name snowleopard.webapi  -p 8080:80 snowleopard.webapi
 
 
