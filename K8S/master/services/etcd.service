@@ -1,0 +1,17 @@
+[Unit]
+Description=Etcd Server
+After=network.target
+
+[Service]
+Type=notify
+User=etcd
+WorkingDirectory=/var/lib/etcd/
+EnvironmentFile=-/vito/etcd/conf/etcd.conf
+ExecStart=/vito/etcd/bin/etcd
+Restart=on-failure
+RestartSec=10s
+LimitNOFILE=65536
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
