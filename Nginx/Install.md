@@ -203,6 +203,7 @@ make install
 vi /etc/init.d/nginx
 
 # 增加服务
+chown nginx:nginx /etc/init.d/nginx
 chmod 755 /etc/init.d/nginx
 
 # CentOS7下要重新加载

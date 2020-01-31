@@ -83,6 +83,18 @@ tee /etc/docker/daemon.json <<-'EOF'
   "registry-mirrors": ["https://registry.docker-cn.com","https://ljcq9oc9.mirror.aliyuncs.com"]
 }
 EOF
+
+tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+EOF
+
+tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://ljcq9oc9.mirror.aliyuncs.com"]
+}
+EOF
 systemctl daemon-reload
 service docker restart
 ```
@@ -108,7 +120,7 @@ yum list installed | grep docker
 docker-engine.x86_64 1.7.1-0.1.el7
 
 # 2、删除docker。
-sudo yum -y remove docker-engine.x86_64 
+sudo yum -y remove docker-engine.x86_64
 # 备注：该命令只是删除docker运行环境，并不会删除镜像，容器，卷文件，以及用户创建的配置文件。
 
 # 3、清除镜像和容器文件。
