@@ -18,7 +18,13 @@ EOF
 systemctl daemon-reload
 service docker restart
 
-docker run --name dockerRegistry \
+docker stop /dockerRegistry
+docker rm /dockerRegistry
+
+# 启动容器
+docker run \
+--name dockerRegistry \
+--restart=always \
 -p 5000:5000 \
 -v /data/registry.repos:/var/lib/registry \
 -d registry
