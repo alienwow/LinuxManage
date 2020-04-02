@@ -25,3 +25,31 @@ scp -P $port ~/.ssh/id_rsa.pub root@$ipHost:~/.ssh/id_rsa.pub
 ssh root@$ipHost -p $port "cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys"
 
 ```
+
+## 配置 ssh 端口号
+
+```bash
+vi /etc/ssh/sshd_config
+
+# 修改如下数据
+# (每隔多少秒给SSH客户端发送一次信号)
+# 注释掉 Port 22
+Port 10022
+
+# 重启 ssh 服务
+systemctl restart sshd.service
+```
+
+## 配置超时连接时间
+
+```bash
+vi /etc/ssh/sshd_config
+
+# 修改如下数据
+# (每隔多少秒给SSH客户端发送一次信号)
+ClientAliveInterval 60
+# (超过多少秒后断开与SSH客户端连接)
+ClientAliveCountMax 86400
+
+systemctl restart sshd.service
+```
