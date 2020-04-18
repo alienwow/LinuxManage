@@ -12,6 +12,10 @@ mkdir -p /data/logs/kubernetes/kubelet
 mkdir -p /data/logs/kubernetes/kube-proxy
 mkdir -p /var/lib/kubelet
 
+# 将以下二进制文件上传到 /vito/kubernetes/bin 目录下
+1. kubelet
+2. kube-proxy
+
 # 安装 kubelet
 touch /lib/systemd/system/kubelet.service
 chmod 766 /lib/systemd/system/kubelet.service

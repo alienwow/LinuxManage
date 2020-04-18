@@ -2,7 +2,7 @@
 
 ## 资料准备
 
-- 下载 [K8S 资源](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.17.md#server-binaries 'K8S 资源'): 该压缩包中包括了k8s需要运行的全部服务程序文件
+- 下载 [K8S 资源](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.17.md#server-binaries 'K8S 资源'): 该压缩包中包括了k8s需要运行的全部服务程序文件
 - 下载 [etcd 资源](https://github.com/etcd-io/etcd/releases 'etcd 资源')
 
 ## 安装 etcd
@@ -46,6 +46,12 @@ mkdir -p /vito/kubernetes/conf
 mkdir -p /data/logs/kubernetes/apiserver
 mkdir -p /data/logs/kubernetes/controller-manager
 mkdir -p /data/logs/kubernetes/scheduler
+
+# 将以下二进制文件上传到 /vito/kubernetes/bin 目录下
+1. kubectl
+2. kube-apiserver
+3. kube-controller-manager
+4. kube-scheduler
 
 # 创建软链接
 ln -s /vito/kubernetes/bin/kubectl /usr/local/bin/kubectl
@@ -100,10 +106,22 @@ kubectl get nodes
 # 查看master集群组件状态
 kubectl get rc
 
+# 查看所有组建容易
+kubectl get all
+
 # 查看 pod
 kubectl get pods
 
 # 查看具体的pod
-kubectl describe pods 【pod Name】
+kubectl describe pods [podName]
+
+# 进入容器
+kubectl exec -it [podName] /bin/bash
+
+# 查看pod日志
+kubectl logs [podName]
+
+# 查看系统日志中有关kubelet的信息
+journalctl -u kubelet -f
 
 ```

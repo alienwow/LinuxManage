@@ -11,15 +11,15 @@ docker pull registry
 tee /etc/docker/daemon.json <<-'EOF'
 {
   "registry-mirrors": ["https://ljcq9oc9.mirror.aliyuncs.com"],
-  "insecure-registries": ["192.168.159.154:5000"]
+    "insecure-registries": ["192.168.159.154:5000"]
 }
 EOF
 
 systemctl daemon-reload
 service docker restart
 
-docker stop /dockerRegistry
-docker rm /dockerRegistry
+docker stop dockerRegistry
+docker rm dockerRegistry
 
 # 启动容器
 docker run \
