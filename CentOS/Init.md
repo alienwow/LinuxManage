@@ -13,6 +13,16 @@ SELINUX=disabled
 shutdown -r now
 ```
 
+## 修改主机名
+
+```bash
+# 查看一下当前主机名的情况
+hostnamectl
+
+vi /etc/hostname
+vi ~/hostname~
+```
+
 ## 防火墙设置
 
 ```bash
@@ -34,6 +44,33 @@ systemctl start iptables.service
 # 开机启动
 systemctl enable iptables.service
 
+
+```
+
+## 配置 yum 源
+
+```bash
+# 禁用 yum插件 fastestmirror
+cp /etc/yum/pluginconf.d/fastestmirror.conf /etc/yum/pluginconf.d/fastestmirror.conf.bak
+# enabled = 1  //由1改为0，禁用该插件
+vi /etc/yum/pluginconf.d/fastestmirror.conf
+
+# 修改yum的配置文件
+cp /etc/yum.conf /etc/yum.conf.bak
+# plugins=1    //改为0，不使用插件
+vi /etc/yum.conf
+
+# 获取阿里云 repo
+cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+
+cp /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.bak
+wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+
+# 清理缓存
+yum clean all
+yum makecache
+yum -y update
 
 ```
 
