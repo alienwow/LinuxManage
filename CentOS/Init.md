@@ -19,8 +19,12 @@ shutdown -r now
 # 查看一下当前主机名的情况
 hostnamectl
 
-vi /etc/hostname
-vi ~/hostname~
+hostnamectl set-hostname [Name] --static
+hostnamectl set-hostname [Name] --transient
+hostnamectl set-hostname [Name] --pretty
+
+cat /etc/hostname
+
 ```
 
 ## 防火墙设置
