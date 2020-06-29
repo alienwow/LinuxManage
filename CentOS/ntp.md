@@ -26,7 +26,8 @@ chronyc sourcestats -v
 chronyc tracking
 
 # 手动同步，需要先停止 chronyd 服务
-chronyd -q 'server 0.centos.pool.ntp.org iburst'
+chronyd -q 'server ntp.aliyun.com iburst'
+
 
 # 显示系统的当前时间和日间
 timedatectl
