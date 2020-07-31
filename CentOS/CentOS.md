@@ -1,4 +1,7 @@
+# CENTOS
+
 ## 关闭 SELINUX
+
 ```bash
 # 注释 SELINUXTYPE 并把 SELINUX改为disabled
 vi /etc/selinux/config
@@ -9,25 +12,23 @@ SELINUX=disabled
 ```
 
 ## 修改 HostName
+
 ```bash
-# 查看 
-hostname
+# 查看一下当前主机名的情况
+hostnamectl
+
+hostnamectl set-hostname [Name] --static
+hostnamectl set-hostname [Name] --transient
+hostnamectl set-hostname [Name] --pretty
+
+cat /etc/hostname
+
 cat /proc/sys/kernel/hostname
-
-# 修改1
-hostname [new Host Name]
-
-# 修改2
-vi /etc/sysconfig/network
-## 修改配置 localhost.localdomain 修改为[new Host Name]
-
-# 修改3
-vi /etc/hosts
-## 添加如下配置 HOSTNAME=[new Host Name]
 
 ```
 
 ## 文件系统
+
 ``` bash
 # 软件安装文件目录
 /softwares
@@ -42,14 +43,32 @@ vi /etc/hosts
 ## 修改yum源为阿里源
 
 ```bash
-# CentOS 6
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+# 禁用 yum插件 fastestmirror
+cp /etc/yum/pluginconf.d/fastestmirror.conf /etc/yum/pluginconf.d/fastestmirror.conf.bak
+# enabled = 1  //由1改为0，禁用该插件
+vi /etc/yum/pluginconf.d/fastestmirror.conf
 
-# CentOS 7
+# 修改yum的配置文件
+cp /etc/yum.conf /etc/yum.conf.bak
+# plugins=1    //改为0，不使用插件
+vi /etc/yum.conf
+
+# 获取阿里云 repo
+cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+
+cp /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.bak
+wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+
+# 清理缓存
+yum clean all
+yum makecache
+yum -y update
+
 ```
 
 ## 目录管理
+
 ```bash
 # 删除目录（递归）
 rm -rf <dir>
@@ -59,6 +78,7 @@ mkdir -p <dir>/<dir>/...
 ```
 
 ## 查看进程
+
 ```bash
 # 进程
 ps -ef |grep mongod
@@ -67,11 +87,13 @@ netstat -ntp
 ```
 
 ## 链接/软链接：设置快捷方式： 可以在命令行界面使用mysql命令了
+
 ```bash
 ln -s /mysql/3306/bin/mysql /usr/bin
 ```
 
-## 修改系统启动顺序：
+## 修改系统启动顺序
+
 ```bash
 cd /etc/rc.d
 # 其中启动顺序需要修改rc.d下的rc[3,4,5].d目录下的文件名
@@ -81,12 +103,14 @@ cd /etc/rc.d
 ```
 
 ## 自动启动
+
 ```bash
 chkconfig --add nginx
-chkconfig --level 345 nginx on 
+chkconfig --level 345 nginx on
 ```
 
 ## 添加环境变量
+
 ``` bash
 # 环境变量目录
 vi /etc/profile
@@ -97,9 +121,8 @@ export PATH=/walkingtec/ffmpeg/lib/:$PATH
 
 ```
 
-
-
 ## 递归查找并删除文件
+
 ```bash
 # 递归查找文件
 find /data/websites/ -name "*.map.gz"
