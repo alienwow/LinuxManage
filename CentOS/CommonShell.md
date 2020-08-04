@@ -37,3 +37,11 @@ nload
 ## 查看端口占用
 
 netstat -nlp |grep 【端口号、进程名等】
+
+## tar
+
+压缩目录
+tar -zcf 【目录名】.tar.gz 【目录名】
+
+解压文件
+tar -zxf 【目录名】.tar.gz

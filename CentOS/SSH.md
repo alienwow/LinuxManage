@@ -53,3 +53,17 @@ ClientAliveCountMax 86400
 
 systemctl restart sshd.service
 ```
+
+## ssh 问题
+
+### 连接慢的解决方案
+
+```bash
+vi /etc/ssh/sshd_config
+
+UseDNS no
+GSSAPIAuthentication no
+
+#重启 SSH 服务
+systemctl restart sshd.service
+```
