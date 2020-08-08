@@ -2,12 +2,12 @@
 
 master 节点必备的基础镜像
 
-1. k8s.gcr.io/kube-apiserver:v1.18.2
-1. k8s.gcr.io/kube-controller-manager:v1.18.2
-1. k8s.gcr.io/kube-scheduler:v1.18.2
-1. k8s.gcr.io/kube-proxy:v1.18.2
+1. k8s.gcr.io/kube-apiserver:v1.18.3
+1. k8s.gcr.io/kube-controller-manager:v1.18.3
+1. k8s.gcr.io/kube-scheduler:v1.18.3
+1. k8s.gcr.io/kube-proxy:v1.18.3
 1. k8s.gcr.io/pause:3.2
-1. k8s.gcr.io/etcd:3.4.3-0
+1. k8s.gcr.io/etcd:3.4.4-0
 1. k8s.gcr.io/coredns:1.6.7
 1. quay.io/coreos/flannel:v0.12.0-amd64
 
@@ -29,42 +29,42 @@ kubeadm init -h
 # 测试
 --dry-run
 
-# k8s.gcr.io/kube-apiserver:v1.18.2
-# k8s.gcr.io/kube-controller-manager:v1.18.2
-# k8s.gcr.io/kube-scheduler:v1.18.2
-# k8s.gcr.io/kube-proxy:v1.18.2
+# k8s.gcr.io/kube-apiserver:v1.18.3
+# k8s.gcr.io/kube-controller-manager:v1.18.3
+# k8s.gcr.io/kube-scheduler:v1.18.3
+# k8s.gcr.io/kube-proxy:v1.18.3
 # k8s.gcr.io/pause:3.2
-# k8s.gcr.io/etcd:3.4.3-0
+# k8s.gcr.io/etcd:3.4.4-0
 # k8s.gcr.io/coredns:1.6.7
 
-# registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.18.2
-# gcr.azk8s.cn/google_containers/kube-apiserver:v1.18.2
+# registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.18.3
+# gcr.azk8s.cn/google_containers/kube-apiserver:v1.18.3
 
-docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.18.2
-docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager:v1.18.2
-docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler:v1.18.2
-docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.18.2
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.18.3
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager:v1.18.3
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler:v1.18.3
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.18.3
 docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.2
-docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.4.3-0
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.4.4-0
 docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.6.7
 
-docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.18.2 k8s.gcr.io/kube-apiserver:v1.18.2
-docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager:v1.18.2 k8s.gcr.io/kube-controller-manager:v1.18.2
-docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler:v1.18.2 k8s.gcr.io/kube-scheduler:v1.18.2
-docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.18.2 k8s.gcr.io/kube-proxy:v1.18.2
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.18.3 k8s.gcr.io/kube-apiserver:v1.18.3
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager:v1.18.3 k8s.gcr.io/kube-controller-manager:v1.18.3
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler:v1.18.3 k8s.gcr.io/kube-scheduler:v1.18.3
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.18.3 k8s.gcr.io/kube-proxy:v1.18.3
 docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.2 k8s.gcr.io/pause:3.2
-docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.4.3-0 k8s.gcr.io/etcd:3.4.3-0
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.4.4-0 k8s.gcr.io/etcd:3.4.4-0
 docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.6.7 k8s.gcr.io/coredns:1.6.7
 
-docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.18.2
-docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager:v1.18.2
-docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler:v1.18.2
-docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.18.2
+docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.18.3
+docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager:v1.18.3
+docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler:v1.18.3
+docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.18.3
 docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.2
-docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.4.3-0
+docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.4.4-0
 docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.6.7
 
-kubeadm init --kubernetes-version="v1.18.2" --pod-network-cidr="10.244.0.0/16" --image-repository="registry.cn-hangzhou.aliyuncs.com/google_containers" --dry-run
+kubeadm init --kubernetes-version="v1.18.3" --pod-network-cidr="10.244.0.0/16" --image-repository="registry.cn-hangzhou.aliyuncs.com/google_containers" --dry-run
 
 # 建议使用普通用户运行，执行如下操作
 #   mkdir -p $HOME/.kube

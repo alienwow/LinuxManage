@@ -2,7 +2,7 @@
 
 node 节点必备的基础镜像
 
-1. k8s.gcr.io/kube-proxy:v1.18.2
+1. k8s.gcr.io/kube-proxy:v1.18.3
 1. k8s.gcr.io/pause:3.2
 1. quay.io/coreos/flannel:v0.12.0-amd64
 
@@ -12,16 +12,16 @@ node 节点必备的基础镜像
 
 kubeadm join -h
 
-# k8s.gcr.io/kube-proxy:v1.18.2
+# k8s.gcr.io/kube-proxy:v1.18.3
 # k8s.gcr.io/pause:3.2
 
-docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.18.2
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.18.3
 docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.2
 
-docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.18.2 k8s.gcr.io/kube-proxy:v1.18.2
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.18.3 k8s.gcr.io/kube-proxy:v1.18.3
 docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.2 k8s.gcr.io/pause:3.2
 
-docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.18.2
+docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.18.3
 docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.2
 
 # quay.io/coreos/flannel:v0.12.0-amd64

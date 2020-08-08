@@ -68,6 +68,7 @@ chmod 755 /etc/sysconfig/modules/ipvs.modules && bash /etc/sysconfig/modules/ipv
 之前添加环境变量设置。
 
 ```bash
+cp /usr/lib/systemd/system/docker.service /usr/lib/systemd/system/docker.service.bak
 vi /usr/lib/systemd/system/docker.service
 
 Environment="HTTPS_PROXY=PROTOCOL://HOST:PORT"
@@ -116,6 +117,8 @@ service docker restart
 
 ```bash
 
+# 创建文件 /etc/sysctl.d/k8s.conf
+touch /etc/sysctl.d/k8s.conf
 vi /etc/sysctl.d/k8s.conf
 
 net.bridge.bridge-nf-call-ip6tables = 1
@@ -164,9 +167,12 @@ rpm -ql kubeadm
 rpm -ql kubectl
 # /usr/bin/kubectl
 
+# config 位置
+~/.kube/config
+
 ```
 
 ## 设置 kubelet
 
-若未警用 Swap 设备，则需要编辑 kubelet 的配置文件 `/etc/sysconfig/kubelet`，设置起忽略 Swap 启用的状态错误。
+若未禁用 Swap 设备，则需要编辑 kubelet 的配置文件 `/etc/sysconfig/kubelet`，设置其忽略 Swap 启用的状态错误。
 内容如下：`KUBELET_EXTRA_ARGS="--fail-swap-on=false"`
