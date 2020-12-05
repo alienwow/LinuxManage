@@ -6,7 +6,7 @@ explicit_defaults_for_timestamp
 
 log-output = FILE
 log-error = /mysql/logs/mysql.err
-#log-bin = /mysql/logs/sortrepl.log
+log-bin = /mysql/logs/sortrepl.log
 slow_query_log_file = /mysql/logs/slowquery.log
 general-log=0
 general_log_file = /mysql/logs/general.log
@@ -15,7 +15,7 @@ max_connect_errors = 100
 max_connections = 151
 
 #字符集
-character-set-server = utf8
+character-set-server = utf8mb4
 #忽略大小写
 lower_case_table_names = 1
 
