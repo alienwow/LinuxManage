@@ -21,7 +21,10 @@ kubeadm init -h
 --kubernetes-version
 
 # 设置 pod 网络
---pod-network-cidr
+--pod-network-cidr="10.244.0.0/16"
+
+# 设置 service 网络
+--service-cidr="10.96.0.0/12"
 
 # 设置镜像仓库
 --image-repository
@@ -64,7 +67,7 @@ docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.2
 docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.4.4-0
 docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.6.7
 
-kubeadm init --kubernetes-version="v1.18.3" --pod-network-cidr="10.244.0.0/16" --image-repository="registry.cn-hangzhou.aliyuncs.com/google_containers" --dry-run
+kubeadm init --kubernetes-version="v1.18.3" --pod-network-cidr="10.244.0.0/16" --service-cidr="10.96.0.0/12" --image-repository="registry.cn-hangzhou.aliyuncs.com/google_containers" --dry-run
 
 # 建议使用普通用户运行，执行如下操作
 #   mkdir -p $HOME/.kube

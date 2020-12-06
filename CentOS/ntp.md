@@ -6,6 +6,7 @@
 ```bash
 # 启动时钟同步服务
 systemctl start chronyd.service
+systemctl restart chronyd.service
 
 # 开机启动
 systemctl enable chronyd.service

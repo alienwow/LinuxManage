@@ -83,7 +83,12 @@ docker build -t snowleopard.webapi .
 
 docker run --name snowleopard.webapi  -p 8080:80 snowleopard.webapi
 
+```bash
 
+# 修改时区，增加的配置
+-e "TZ=Asia/Shanghai" \
+
+```
 
 
 

@@ -7,6 +7,8 @@ docker pull nginx:1.15.8
 
 # 创建目录
 mkdir -p /data/docker/container/nginx/logs
+mkdir -p /data/docker/container/nginx/logs
+mkdir -p /data/docker/container/nginx/logs
 
 # 启动 nginx 容器
 docker run \

@@ -71,7 +71,10 @@ chmod 755 /etc/sysconfig/modules/ipvs.modules && bash /etc/sysconfig/modules/ipv
 cp /usr/lib/systemd/system/docker.service /usr/lib/systemd/system/docker.service.bak
 vi /usr/lib/systemd/system/docker.service
 
+# 设置代理
 Environment="HTTPS_PROXY=PROTOCOL://HOST:PORT"
+
+# 设置不需要代理的ip
 Environment="NO_PROXY=192.168.1.0/24,127.0.0.0/8"
 
 ```

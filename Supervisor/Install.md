@@ -1,4 +1,7 @@
+# README
+
 ## 1、安装
+
 ```bash
 mkdir -p /data/logs
 yum install python-setuptools
@@ -9,6 +12,7 @@ pip uninstall supervisor
 ```
 
 ## 2、配置
+
 ```bash
 mkdir -p /sundot/supervisor/conf
 echo_supervisord_conf > /sundot/supervisor/supervisord.conf
