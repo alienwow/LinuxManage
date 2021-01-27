@@ -38,8 +38,8 @@ consul:1.9.2 agent -server -ui -bootstrap -client=0.0.0.0
 
 ```bash
 
-docker stop consul-server1
-docker rm consul-server1
+docker stop consul-server
+docker rm consul-server
 
 docker run -d \
 -p 8300:8300/tcp \
@@ -48,7 +48,7 @@ docker run -d \
 -p 8500:8500/tcp \
 -p 8600:8600/tcp \
 -p 8600:8600/udp \
---name consul-server1 \
+--name consul-server \
 --restart always \
 # 开启宿主机网络
 --net=host \
@@ -77,8 +77,8 @@ consul:1.9.2 agent \
 
 ```bash
 
-docker stop consul-client1
-docker rm consul-client1
+docker stop consul-client
+docker rm consul-client
 
 docker run -d \
 -p 8300:8300/tcp \
@@ -87,7 +87,7 @@ docker run -d \
 -p 8500:8500/tcp \
 -p 8600:8600/tcp \
 -p 8600:8600/udp \
---name consul-client1 \
+--name consul-client \
 --restart always \
 # 开启宿主机网络
 --net=host \
@@ -98,7 +98,7 @@ consul:1.9.2 agent \
 # server 模式，client 为客户端模式
 -client \
 # 节点名称
--node=client1 \
+-node=client \
 # 数据中心名称
 -datacenter=dc1 \
 -client=0.0.0.0 \
