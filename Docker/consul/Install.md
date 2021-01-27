@@ -3,6 +3,8 @@
 ## 部署准备
 
 ```bash
+# 拉取镜像
+docker pull consul:1.9.2
 
 # 宿主机上创建目录
 mkdir -p /vito/consul/conf/
@@ -16,17 +18,17 @@ mkdir -p /vito/consul/consul_ui/
 ```bash
 
 # 拉取镜像
-docker pull consul:1.8.3
+docker pull consul:1.9.2
 
-docker stop consul
-docker rm consul
+docker stop consul-server
+docker rm consul-server
 
 # Consul 单实例
 docker run -d \
 -p 8500:8500/tcp \
---name consul \
+--name consul-server \
 --restart always \
-consul:1.8.3 agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
+consul:1.9.2 agent -server -ui -bootstrap -client=0.0.0.0
 
 ```
 
