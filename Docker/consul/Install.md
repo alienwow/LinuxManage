@@ -1,5 +1,6 @@
+# 部署 consul
 
-# 部署准备
+## 部署准备
 
 ```bash
 
@@ -8,76 +9,99 @@ mkdir -p /vito/consul/conf/
 mkdir -p /vito/consul/data/
 mkdir -p /vito/consul/consul_ui/
 
+```
+
+## docker 单机部署
+
+```bash
+
 # 拉取镜像
-docker pull consul:1.4.1
+docker pull consul:1.8.3
 
-# Running Consul for Development
-docker run \
---name=consul \
--h server-node1 \
--p 8500:8500 \
--p 8600:8600/udp \
--p 8300:8300 \
+docker stop consul
+docker rm consul
+
+# Consul 单实例
+docker run -d \
+-p 8500:8500/tcp \
+--name consul \
+--restart always \
+consul:1.8.3 agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
+
+```
+
+## docker 集群部署
+
+### server
+
+```bash
+
+docker stop consul-server1
+docker rm consul-server1
+
+docker run -d \
+-p 8300:8300/tcp \
+-p 8301:8301/tcp \
 -p 8301:8301/udp \
--p 8302:8302/udp \
--e CONSUL_BIND_INTERFACE=eth0 \
--d consul:1.4.1
-
-# Running Consul Agent in Client Mode
-docker run \
---net=host -e 'CONSUL_LOCAL_CONFIG={"leave_on_terminate": true}' \
--d consul:1.4.1 \
-agent \
--bind=<external ip> \
--retry-join=<root agent ip>
-
-docker run \
--p 8100:8500 \
---name=client1 \
--d -e 'CONSUL_LOCAL_CONFIG={"leave_on_terminate": true}' \
-consul:1.4.1 \
-agent \
--bind=172.17.0.5 \
--retry-join=172.17.0.2 \
--node=client1
-
-# Running Consul Agent in Server Mode
-docker run -p 8600:53/udp -h node1 progrium/consul -server -bootstrap
-
-docker run -d consul:1.4.1 \
+-p 8500:8500/tcp \
+-p 8600:8600/tcp \
+-p 8600:8600/udp \
+--name consul-server1 \
+--restart always \
+# 开启宿主机网络
 --net=host \
+# 绑定指定的网卡
+-e CONSUL_BIND_INTERFACE='ens192' \
 -e 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true}' \
-agent \
+consul:1.9.2 agent \
+# server 模式，client 为客户端模式
 -server \
--bind=<external ip> \
--retry-join=<root agent ip> \
--bootstrap-expect=<number of server agents>
+# 开启 ui 
+-ui \
+# 节点名称
+-node=server1 \
+# 数据中心名称
+-datacenter=dc1 \
+-client=0.0.0.0 \
+# 默认的 leader
+-bootstrap \
+# 表示加入 172.11.80.20 所在的集群
+-join=172.11.80.20 \
+-retry-join=172.11.80.20
 
-docker run -d consul:1.4.1 \
--p 8500:8500 \
--e 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true}' \
---name=consul1 \
-agent -server \
--bind=172.17.0.2 \
--bootstrap-expect=3 \
--node=server1
+```
 
-docker run -d consul:1.4.1 \
--e 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true}' \
---name=consul2 \
-agent -server \
--bind=172.17.0.3 \
--retry-join=172.17.0.2 \
--bootstrap-expect=3 \
--node=server2
+### client
 
-docker run -d consul:1.4.1 \
+```bash
+
+docker stop consul-client1
+docker rm consul-client1
+
+docker run -d \
+-p 8300:8300/tcp \
+-p 8301:8301/tcp \
+-p 8301:8301/udp \
+-p 8500:8500/tcp \
+-p 8600:8600/tcp \
+-p 8600:8600/udp \
+--name consul-client1 \
+--restart always \
+# 开启宿主机网络
+--net=host \
+# 绑定指定的网卡
+-e CONSUL_BIND_INTERFACE='ens192' \
 -e 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true}' \
---name=consul3 \
-agent -server \
--bind=172.17.0.4 \
--retry-join=172.17.0.2 \
--bootstrap-expect=3 \
--node=server3
+consul:1.9.2 agent \
+# server 模式，client 为客户端模式
+-client \
+# 节点名称
+-node=client1 \
+# 数据中心名称
+-datacenter=dc1 \
+-client=0.0.0.0 \
+# 表示加入 172.11.80.20 所在的集群
+-join=172.11.80.20 \
+-retry-join=172.11.80.20
 
 ```
