@@ -129,3 +129,18 @@ rm -rf /var/lib/docker
 # 4、手工查找并删除用户创建的配置文件。
 
 ```
+
+## 常用命令
+
+```bash
+
+# 将容器保存为镜像
+docker commit containerName newImageName
+
+# 镜像备份
+docker save -o imageName.tar imageName
+
+# 镜像恢复与迁移
+docker load -i imageName.tar
+
+```
