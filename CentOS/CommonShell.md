@@ -36,7 +36,16 @@ nload
 
 ## 查看端口占用
 
+```bash
+# 安装 netstat
+yum install -y net-tools
+
+# 其中：-n表示表示输出中不显示主机，端口和用户名，-lb表示只显示监听listening端口，-t表示只显示tcp协议的端口，-p表示显示进程的PID和进程名称。
+
 netstat -nlp |grep 【端口号、进程名等】
+
+netstat -nltp
+```
 
 ## tar
 
