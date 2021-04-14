@@ -1,5 +1,5 @@
 # https://github.com/elastic/elasticsearch-docker
-FROM docker.elastic.co/elasticsearch/elasticsearch:7.11.1
+FROM elasticsearch:7.11.1
 
 ENV IK_VERSION=7.11.1
 

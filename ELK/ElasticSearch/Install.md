@@ -9,6 +9,14 @@
 
 1. [下载 head](https://github.com/mobz/elasticsearch-head)
 
+## 部署 kibana
+
+```bash
+
+docker pull elasticsearch:7.11.1
+
+```
+
 ### 跨域问题
 
 ```bash
@@ -142,6 +150,7 @@ mkdir -p /Users/vito/data/es-cluster/{node1,node2,node3}/log/
 echo "
 http.cors.enabled: true
 http.cors.allow-origin: \"*\"
+http.cors.allow-headers: Authorization
 
 # 是否可作为主节点
 node.master: true
@@ -232,14 +241,6 @@ elasticsearch-ik:7.11.1
 
 ```bash
 
-# 修改配置
-echo "xpack.security.enabled: true">> /Users/vito/data/es-cluster/node1/config/elasticsearch.yml
-echo "xpack.security.enabled: true">> /Users/vito/data/es-cluster/node2/config/elasticsearch.yml
-echo "xpack.security.enabled: true">> /Users/vito/data/es-cluster/node3/config/elasticsearch.yml
-
-# 重启集群
-docker restart es-cluster-node1 es-cluster-node2 es-cluster-node3
-
 # 进入任意一个节点生成证书
 docker exec -it es-cluster-node1 bash
 # 生成证书
@@ -249,20 +250,11 @@ bin/elasticsearch-certutil cert -out config/elastic-certificates.p12 -pass ""
 docker cp es-cluster-node1:/usr/share/elasticsearch/config/elastic-certificates.p12 /Users/vito/data/es-cluster/elastic-certificates.p12
 
 # 修改配置
-echo "xpack.security.transport.ssl.enabled: true
+echo "xpack.security.enabled: true
+xpack.security.transport.ssl.enabled: true
 xpack.security.transport.ssl.verification_mode: certificate
 xpack.security.transport.ssl.keystore.path: elastic-certificates.p12
-xpack.security.transport.ssl.truststore.path: elastic-certificates.p12">> /Users/vito/data/es-cluster/node1/config/elasticsearch.yml
-
-echo "xpack.security.transport.ssl.enabled: true
-xpack.security.transport.ssl.verification_mode: certificate
-xpack.security.transport.ssl.keystore.path: elastic-certificates.p12
-xpack.security.transport.ssl.truststore.path: elastic-certificates.p12">> /Users/vito/data/es-cluster/node2/config/elasticsearch.yml
-
-echo "xpack.security.transport.ssl.enabled: true
-xpack.security.transport.ssl.verification_mode: certificate
-xpack.security.transport.ssl.keystore.path: elastic-certificates.p12
-xpack.security.transport.ssl.truststore.path: elastic-certificates.p12">> /Users/vito/data/es-cluster/node3/config/elasticsearch.yml
+xpack.security.transport.ssl.truststore.path: elastic-certificates.p12">> /Users/vito/data/es-cluster/elasticsearch.yml
 
 # 为 es 容器添加文件映射，将宿主机证书映射到容器
 # node-1
@@ -337,77 +329,22 @@ docker run \
 -d \
 elasticsearch-ik:7.11.1
 
-# node-1
-docker stop es-cluster-node1
-docker rm es-cluster-node1
+# 进入任意一个节点设置密码即可
+docker exec -it es-cluster-node1 bash
 
-docker run \
---name es-cluster-node1 \
--e "TZ=Asia/Shanghai" \
--e "node.name=es-cluster-node1" \
--e "cluster.name=es-docker-cluster" \
--e "http.port=9201" \
--e "transport.tcp.port=9301" \
--e "network.publish_host=192.168.1.100" \
--e "discovery.seed_hosts=192.168.1.100:9301,192.168.1.100:9302,192.168.1.100:9303" \
--e "cluster.initial_master_nodes=es-cluster-node1,es-cluster-node2,es-cluster-node3" \
--e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
--v /Users/vito/data/es-cluster/node1/data:/usr/share/elasticsearch/data \
--v /Users/vito/data/es-cluster/node3/log:/usr/share/elasticsearch/log \
--v /Users/vito/data/es-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
--v /Users/vito/data/es-cluster/elastic-certificates.p12:/usr/share/elasticsearch/config/elastic-certificates.p12 \
--p 9201:9201 \
--p 9301:9301 \
--d \
-elasticsearch-ik:7.11.1
+# 设置自定义密码
+bin/elasticsearch-setup-passwords interactive
 
-# node-2
-docker stop es-cluster-node2
-docker rm es-cluster-node2
+# 然后输入密码
+h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
 
-docker run \
---name es-cluster-node2 \
--e "TZ=Asia/Shanghai" \
--e "node.name=es-cluster-node2" \
--e "cluster.name=es-docker-cluster" \
--e "http.port=9202" \
--e "transport.tcp.port=9302" \
--e "network.publish_host=192.168.1.100" \
--e "discovery.seed_hosts=192.168.1.100:9301,192.168.1.100:9302,192.168.1.100:9303" \
--e "cluster.initial_master_nodes=es-cluster-node1,es-cluster-node2,es-cluster-node3" \
--e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
--v /Users/vito/data/es-cluster/node2/data:/usr/share/elasticsearch/data \
--v /Users/vito/data/es-cluster/node3/log:/usr/share/elasticsearch/log \
--v /Users/vito/data/es-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
--v /Users/vito/data/es-cluster/elastic-certificates.p12:/usr/share/elasticsearch/config/elastic-certificates.p12 \
--p 9202:9202 \
--p 9302:9302 \
--d \
-elasticsearch-ik:7.11.1
-
-# node-3
-docker stop es-cluster-node3
-docker rm es-cluster-node3
-
-docker run \
---name es-cluster-node3 \
--e "TZ=Asia/Shanghai" \
--e "node.name=es-cluster-node3" \
--e "cluster.name=es-docker-cluster" \
--e "http.port=9203" \
--e "transport.tcp.port=9303" \
--e "network.publish_host=192.168.1.100" \
--e "discovery.seed_hosts=192.168.1.100:9301,192.168.1.100:9302,192.168.1.100:9303" \
--e "cluster.initial_master_nodes=es-cluster-node1,es-cluster-node2,es-cluster-node3" \
--e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
--v /Users/vito/data/es-cluster/node3/data:/usr/share/elasticsearch/data \
--v /Users/vito/data/es-cluster/node3/log:/usr/share/elasticsearch/log \
--v /Users/vito/data/es-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
--v /Users/vito/data/es-cluster/elastic-certificates.p12:/usr/share/elasticsearch/config/elastic-certificates.p12 \
--p 9203:9203 \
--p 9303:9303 \
--d \
-elasticsearch-ik:7.11.1
+# apm_system: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
+# kibana_system: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
+# kibana: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
+# logstash_system: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
+# beats_system: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
+# remote_monitoring_user: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
+# elastic: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
 
 ```
 
@@ -427,27 +364,4 @@ xpack.security.transport.ssl.enabled: true
 xpack.security.transport.ssl.verification_mode: certificate
 xpack.security.transport.ssl.keystore.path: elastic-certificates.p12
 xpack.security.transport.ssl.truststore.path: elastic-certificates.p12
-```
-
-### 为 es 设置密码
-
-```bash
-
-# 进入任意一个节点设置密码即可
-docker exec -it es-cluster-node1 bash
-
-# 设置自定义密码
-bin/elasticsearch-setup-passwords interactive
-
-# 然后输入密码
-h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
-
-# apm_system: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
-# kibana_system: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
-# kibana: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
-# logstash_system: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
-# beats_system: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
-# remote_monitoring_user: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
-# elastic: h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61
-
 ```

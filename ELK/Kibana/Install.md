@@ -15,9 +15,6 @@ echo "
 server.name: kibana
 server.host: \"0\"
 elasticsearch.hosts: [\"http://172.11.80.69:9201\",\"http://172.11.80.69:9202\",\"http://172.11.80.69:9203\"]
-monitoring.ui.container.elasticsearch.enabled: true
-xpack.monitoring.ui.container.elasticsearch.enabled: true
-xpack.security.enabled: true
 elasticsearch.username: \"kibana\"
 elasticsearch.password: \"h\!I\!Nq5WQJdGM81HxTF*%B\$c\$kGQx&61\"
 "> /Users/vito/data/kibana/config/kibana.yml
@@ -28,9 +25,6 @@ echo "
 server.name: kibana
 server.host: \"0\"
 elasticsearch.hosts: [\"http://192.168.1.100:9201\",\"http://192.168.1.100:9202\",\"http://192.168.1.100:9203\"]
-monitoring.ui.container.elasticsearch.enabled: true
-xpack.monitoring.ui.container.elasticsearch.enabled: true
-xpack.security.enabled: true
 elasticsearch.username: \"kibana\"
 elasticsearch.password: \"h\!I\!Nq5WQJdGM81HxTF*%B\$c\$kGQx&61\"
 "> /Users/vito/data/kibana/config/kibana.yml
