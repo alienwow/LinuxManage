@@ -9,14 +9,17 @@ mkdir -p /Users/vito/data/mongodb/logs/mongodb.log
 touch /Users/vito/data/mongodb/logs/mongodb.log
 
 # 拉取最新的官方 mongo 镜像
-docker pull mongo:4.1
+docker pull mongo:4.4.4
+
+docker stop mongodb
+docker rm mongodb
 
 docker run --name mongodb \
 -p 27017:27017 \
 -v /Users/vito/data/mongodb/data:/data/db \
 -v /Users/vito/data/mongodb/conf:/data/configdb \
 -v /Users/vito/data/mongodb/logs:/var/log/mongodb \
--d mongo:4.1
+-d mongo:4.4.4
 
 # 进入系统
 docker exec -it mongodb bash
@@ -33,12 +36,12 @@ db.createUser(
   }
 )
 
-use edudot_spider
+use vito_db
 db.createUser(
   {
-    user: "edudot_spider",
+    user: "vito",
     pwd: "abcd-1234",
-    roles: [ { role: "dbOwner", db: "edudot_spider" } ]
+    roles: [ { role: "dbOwner", db: "vito_db" } ]
   }
 )
 
