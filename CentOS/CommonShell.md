@@ -54,3 +54,20 @@ tar -zcf 【目录名】.tar.gz 【目录名】
 
 解压文件
 tar -zxf 【目录名】.tar.gz
+
+## 查看打开的文件句柄数量
+
+```bash
+# 查看指定进程打开的文件句柄数量
+lsof -p [PID] | wc -l
+
+# 查看指定进程所有打开的文件句柄
+lsof -p [PID]
+
+# 查看指定进程打开的文件句柄数量
+ll /proc/[PID]/fd |wc -l
+# 查看指定进程打开的socket类型的文件句柄
+ll /proc/[PID]/fd |grep socket:
+# 查看指定进程打开的socket类型的文件句柄数量
+ll /proc/[PID]/fd |grep socket: |wc -l
+```
