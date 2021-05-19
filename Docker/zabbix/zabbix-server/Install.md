@@ -131,3 +131,21 @@ docker run \
 # 默认密码：Admin/zabbix
 
 ```
+
+## 解决 zabbix-web 乱码问题
+
+```bash
+# 下载字体simkai.ttf
+
+# 拷贝字体到docker 容器内部
+docker cp /data/simkai.ttf zabbix-web:/usr/share/zabbix/assets/fonts/
+
+# 通过超管权限进去进入容器
+docker exec -it -u root zabbix-web /bin/sh
+
+# 备份以前的字体文件
+mv /usr/share/zabbix/assets/fonts/DejaVuSans.ttf /usr/share/zabbix/assets/fonts/DejaVuSans.ttf_bak
+
+# 链接
+ln -s simkai.ttf DejaVuSans.ttf
+```
