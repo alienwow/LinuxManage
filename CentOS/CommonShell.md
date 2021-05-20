@@ -49,11 +49,18 @@ netstat -nltp
 
 ## tar
 
-压缩目录
+```bash
+
+# 压缩目录
 tar -zcf 【目录名】.tar.gz 【目录名】
 
-解压文件
+# 解压文件
 tar -zxf 【目录名】.tar.gz
+
+# 解压到指定目录
+tar -zxf 【目录名】.tar.gz -C [目录]
+
+```
 
 ## 查看打开的文件句柄数量
 
