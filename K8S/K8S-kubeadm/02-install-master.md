@@ -40,6 +40,10 @@ kubeadm init -h
 # k8s.gcr.io/etcd:3.4.4-0
 # k8s.gcr.io/coredns:1.6.7
 
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.16.1
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.16.1 gcr.io/kubernetes-helm/tiller:v2.16.1
+docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.16.1
+
 # registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.18.3
 # gcr.azk8s.cn/google_containers/kube-apiserver:v1.18.3
 
