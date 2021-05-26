@@ -1,0 +1,4 @@
+http.host: "0.0.0.0"
+xpack.monitoring.elasticsearch.hosts: ["172.11.80.69:9201","172.11.80.69:9202","172.11.80.69:9203"]
+xpack.monitoring.elasticsearch.username: "elastic" 
+xpack.monitoring.elasticsearch.password: "h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61"

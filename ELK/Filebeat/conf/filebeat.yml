@@ -1,0 +1,110 @@
+# filebeat.inputs:
+# - type: log
+#   enabled: true
+#   paths:
+#     # 容器内的路径，可以不用修改，映射到这个路径就可以
+#     - /val/log/
+
+#   # fields:
+#   #   # 额外添加的字段
+#   #   project-name: your_project_name
+
+#   # 需要排除和包括的行（正则表达式）
+#   exclude_lines: ['INFO']
+
+#   include_lines: ['ERROR']
+
+#   # 这个是用来处理异常产生多行数据时，将多行数据当作一条日志处理，根据自己的异常日志的格式做修改
+#   multiline.pattern: '^['
+#   multiline.negate: true
+#   multiline.match: after
+
+#   # 忽略7天的数据 
+#   ignore_older: 168h
+
+#   tail_files: true
+
+# #================================ Outputs =====================================
+
+# #----------------------------- elasticsearch output --------------------------------
+
+# output.elasticsearch:
+#   hosts: ["172.11.80.69:9201","172.11.80.69:9202","172.11.80.69:9203"]
+#   username: "elastic"
+#   password: "h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61"
+#   # index: "nginx-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+# # setup.template.name: "nginx"
+# # setup.template.pattern: "nginx-*"
+# # setup.dashboards.index: "nginx-*"
+# setup.template.settings:
+#   index.number_of_shards: 3
+
+# # #----------------------------- Logstash output --------------------------------
+# # output.logstash:
+# #   # The Logstash hosts #配多个logstash使用负载均衡机制
+# #   hosts: ["192.168.110.130:5044","192.168.110.131:5044","192.168.110.132:5044","192.168.110.133:5044"]  
+# #   loadbalance: true  #使用了负载均衡
+
+# #   # Optional SSL. By default is off.
+# #   # List of root certificates for HTTPS server verifications
+# #   #ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
+
+# #   # Certificate for SSL client authentication
+# #   #ssl.certificate: "/etc/pki/client/cert.pem"
+
+# #   # Client Certificate Key
+# #   #ssl.key: "/etc/pki/client/cert.key"
+
+# #============================= Filebeat modules ===============================
+
+# filebeat.config.modules:
+#   # Glob pattern for configuration loading
+#   # path: /usr/share/filebeat/modules.d/*.yml
+#   path: ${path.config}/modules.d/*.yml
+
+#   # Set to true to enable config reloading
+#   reload.enabled: false
+
+#   # Period on which files under path should be checked for changes
+#   #reload.period: 10s
+
+# setup.kibana:
+#   host: "172.11.80.69:5601"
+
+# setup.ilm.overwrite: true
+
+
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+ 
+# filebeat.autodiscover:
+#   providers:
+#     - type: docker
+#       hints.enabled: true
+ 
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/access/*.log
+    json.keys_under_root: true
+    json.overwrite_keys: true
+
+setup.kibana.host: "172.11.80.69:5601"
+setup.ilm.enabled: false
+setup.template.name: "filebeat-nginx"
+setup.template.pattern: "filebeat-nginx-*"
+setup.template.enabled: false
+setup.template.overwrite: true
+
+# output.elasticsearch:
+#   hosts: ["172.11.80.69:9201","172.11.80.69:9202","172.11.80.69:9203"]
+#   username: "elastic"
+#   password: "h!I!Nq5WQJdGM81HxTF*%B$c$kGQx&61"
+#   index: "nginx-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+output.logstash:
+  hosts: ["172.11.80.69:5044"]
