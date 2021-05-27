@@ -1,4 +1,4 @@
-NGINXACCESS %{IP:remote_addr} - (%{USERNAME:user}|-) \[%{HTTPDATE:timestamp}\] "((%{WORD:req_method}|-) (%{URIPATH1:req_path}|-)(\?%{URIPARM1:req_params}|-)(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})" %{NUMBER:status} (?:%{NUMBER:body_bytes_sent}|-) (?:%{DATA:req_body}|-) %{QS:referer} "%{QS:user_agent}" "%{QS:proxy_add_x_forwarded_for}" "%{NUMBER:req_time}" "%{HOSTPORT1:upstream_addr}" "%{NUMBER:upstream_response_time}"
+NGINXACCESS %{IP:remote_addr} - (%{USERNAME:user}|-) \[%{HTTPDATE:timestamp}\] "%{NGINXREQUEST:nginx_request}" %{NUMBER:status} (?:%{NUMBER:body_bytes_sent}|-) (?:%{DATA:req_body}|-) %{QS:referer} "%{QS:user_agent}" "%{QS:proxy_add_x_forwarded_for}" "%{NUMBER:req_time}" "%{HOSTPORT1:upstream_addr}" "%{NUMBER:upstream_response_time}"
 
 URIPARM1 [A-Za-z0-9$.+!*'(),~@#%&/=:;^\_?-\[\]]*
 URIPATH1 (?:/[A-Za-z0-9$.+!*'(),~@#%&/=:;^\_?-\[\]]*)+
@@ -6,4 +6,5 @@ HOSTNAME1 \b(?:[0-9A-Za-z_\-][0-9A-Za-z-_\-]{0,62})(?:\.(?:[0-9A-Za-z_\-][0-9A-Z
 STATUS ([0-9.]{0,3}[, ]{0,2})+
 HOSTPORT1 (%{IP}:%{POSINT}[, ]{0,2})+
 FORWORD (?:%{IP}[,]?[ ]?)+|%{WORD}
-NGINXREQUEST ((%{WORD:req_method}|-) (%{URIPATH1:req_path}|-)(\?%{URIPARM1:req_params}|-)(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})
+NGINXREQUEST (%{WORD:req_method}) (%{URIPATH:req_path}|-)(%{URIPARAM:req_params}|-)?(?: HTTP/%{NUMBER:httpversion})
+NGINXREQUEST1 ((%{WORD:req_method}|-) (%{URIPATH1:req_path}|-)(\?%{URIPARM1:req_params}|-)(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})
